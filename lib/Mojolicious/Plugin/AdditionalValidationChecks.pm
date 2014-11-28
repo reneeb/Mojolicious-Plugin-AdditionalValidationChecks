@@ -3,8 +3,21 @@ use Mojo::Base 'Mojolicious::Plugin';
 
 our $VERSION = '0.01';
 
+use Email::Valid;
+
 sub register {
-  my ($self, $app) = @_;
+    my ($self, $app) = @_;
+
+    my $email = Email::Valid->new(
+        allow_ip => 1,
+    );
+
+    my $validator = $app->validator;
+    $validator->add_check( email => sub {
+        my ($self, $field, $value, @params) = @_;
+        my $address = $email->address( @params, -address => $value );
+        return $address ? 1 : undef;
+    });
 }
 
 1;
@@ -21,23 +34,48 @@ Mojolicious::Plugin::AdditionalValidationChecks - Mojolicious Plugin
   # Mojolicious
   $self->plugin('AdditionalValidationChecks');
 
-  # Mojolicious::Lite
-  plugin 'AdditionalValidationChecks';
+  
 
 =head1 DESCRIPTION
 
-L<Mojolicious::Plugin::AdditionalValidationChecks> is a L<Mojolicious> plugin.
+L<Mojolicious::Plugin::AdditionalValidationChecks> adds a few validation checks to
+the L<Mojolicious validator|Mojolicious::Validator>.
 
-=head1 METHODS
+=head1 CHECKS
 
-L<Mojolicious::Plugin::AdditionalValidationChecks> inherits all methods from
-L<Mojolicious::Plugin> and implements the following new ones.
+These checks are added:
 
-=head2 register
+=head2 email
 
-  $plugin->register(Mojolicious->new);
+Checks that the given value is a valid email. It uses C<Email::Valid>.
 
-Register plugin in L<Mojolicious> application.
+=head3 simple check
+
+This does only check whether the given mailaddress is valid or not
+
+  my $validation = $self->validation;
+  $validation->input({ email_address => 'dummy@test.example' });
+  $validation->required( 'email_address' )->email();
+
+=head3 check also MX
+
+Check if there's a mail host for it
+
+  my $validation = $self->validation;
+  $validation->input({ email_address => 'dummy@test.example' });
+  $validation->required( 'email_address' )->email(-mxcheck => 1);
+
+=head2 phone
+
+=head2 min
+
+=head2 max
+
+=head2 length
+
+=head2 int
+
+=head2 url
 
 =head1 SEE ALSO
 
