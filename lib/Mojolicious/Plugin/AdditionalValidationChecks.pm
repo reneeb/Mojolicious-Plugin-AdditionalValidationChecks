@@ -44,7 +44,7 @@ sub register {
     $validator->add_check( length => sub {
     });
 
-    $validator->add_check( url => sub {
+    $validator->add_check( http_url => sub {
     });
 }
 
@@ -62,7 +62,10 @@ Mojolicious::Plugin::AdditionalValidationChecks - Mojolicious Plugin
   # Mojolicious
   $self->plugin('AdditionalValidationChecks');
 
-  
+  # Controller
+  my $validation = $self->validation;
+  $validation->input({ nr => 3 });
+  $validation->required( 'nr' )->max( 10 );
 
 =head1 DESCRIPTION
 
@@ -95,15 +98,59 @@ Check if there's a mail host for it
 
 =head2 phone
 
+*not implemented yet*
+
 =head2 min
+
+Checks a number for a minimum value. If a non-number is passed, it's always invalid
+
+  my $validation = $self->validation;
+  $validation->input({ nr => 3 });
+  $validation->required( 'nr' )->min( 10 ); # not valid
+  $validation->required( 'nr' )->min( 2 );  # valid
+  $validation->input({ nr => 'abc' });
+  $validation->required( 'nr' )->min( 10 ); # not valid
 
 =head2 max
 
+Checks a number for a maximum value. If a non-number is passed, it's always invalid
+
+  my $validation = $self->validation;
+  $validation->input({ nr => 3 });
+  $validation->required( 'nr' )->max( 10 ); # not valid
+  $validation->required( 'nr' )->max( 2 );  # valid
+  $validation->input({ nr => 'abc' });
+  $validation->required( 'nr' )->max( 10 ); # not valid
+
 =head2 length
+
+*not implemented yet*
 
 =head2 int
 
-=head2 url
+Checks if a number is an integer. If a non-number is passed, it's always invalid
+
+  my $validation = $self->validation;
+  $validation->input({ nr => 3 });
+  $validation->required( 'nr' )->int(); # valid
+  $validation->input({ nr => 'abc' });
+  $validation->required( 'nr' )->int(); # not valid
+  $validation->input({ nr => '3.0' });
+  $validation->required( 'nr' )->int(); # not valid
+
+=head2 http_url
+
+Checks if a given string is an B<absolute> URL with I<http> or I<https> scheme.
+
+  my $validation = $self->validation;
+  $validation->input({ url => 'http://perl-services.de' });
+  $validation->required( 'url' )->http_url(); # valid
+  $validation->input({ url => 'https://metacpan.org' });
+  $validation->required( 'url' )->http_url(); # valid
+  $validation->input({ url => 3 });
+  $validation->required( 'url' )->http_url(); # not valid
+  $validation->input({ url => 'mailto:dummy@example.com' });
+  $validation->required( 'url' )->http_url(); # not valid
 
 =head1 SEE ALSO
 
