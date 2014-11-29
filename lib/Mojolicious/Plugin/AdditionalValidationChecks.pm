@@ -4,6 +4,7 @@ use Mojo::Base 'Mojolicious::Plugin';
 our $VERSION = '0.01';
 
 use Email::Valid;
+use Scalar::Util qw(looks_like_number);
 
 sub register {
     my ($self, $app) = @_;
@@ -16,7 +17,34 @@ sub register {
     $validator->add_check( email => sub {
         my ($self, $field, $value, @params) = @_;
         my $address = $email->address( @params, -address => $value );
-        return $address ? 1 : undef;
+        return $address ? 0 : 1;
+    });
+
+    $validator->add_check( int => sub {
+        my ($nr) = $_[2] =~ m{\A ([\+-]? [0-9]+) \z}x;
+        my $return = defined $nr ? 0 : 1;
+        return $return;
+    });
+
+    $validator->add_check( min => sub {
+        return 1 if !looks_like_number( $_[2] );
+        return if !defined $_[3];
+        return $_[2] < $_[3];
+    });
+
+    $validator->add_check( max => sub {
+        return 1 if !looks_like_number( $_[2] );
+        return if !defined $_[3];
+        return $_[2] > $_[3];
+    });
+
+    $validator->add_check( phone => sub {
+    });
+
+    $validator->add_check( length => sub {
+    });
+
+    $validator->add_check( url => sub {
     });
 }
 
