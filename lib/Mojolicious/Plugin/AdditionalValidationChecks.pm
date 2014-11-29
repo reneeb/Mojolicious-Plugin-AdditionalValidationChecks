@@ -5,6 +5,7 @@ our $VERSION = '0.01';
 
 use Email::Valid;
 use Scalar::Util qw(looks_like_number);
+use Mojo::URL;
 
 sub register {
     my ($self, $app) = @_;
@@ -45,6 +46,11 @@ sub register {
     });
 
     $validator->add_check( http_url => sub {
+        my $url = Mojo::URL->new( $_[2] );
+        return 1 if !$url;
+        return 1 if !$url->is_abs;
+        return 1 if !grep{ $url->scheme eq $_ }qw(http https);
+        return 0;
     });
 }
 
