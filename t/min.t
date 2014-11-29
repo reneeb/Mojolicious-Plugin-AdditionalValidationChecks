@@ -35,7 +35,7 @@ my $t = Test::Mojo->new;
 for my $nr ( keys %nrs ) {
     (my $esc = $nr) =~ s/\+/\%2B/g;
     my ($min,$res)  = @{ $nrs{$nr} };
-    $t->get_ok('/?nr=' . $esc . ';min=' . $min)->status_is(200)->content_is( $res, "Check: $nr // $min" );
+    $t->get_ok('/?nr=' . $esc . '&min=' . $min)->status_is(200)->content_is( $res, "Check: $nr // $min" );
 }
 
 done_testing();
