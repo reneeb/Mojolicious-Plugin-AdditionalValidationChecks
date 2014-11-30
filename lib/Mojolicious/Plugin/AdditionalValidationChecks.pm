@@ -51,6 +51,12 @@ sub register {
     });
 
     $validator->add_check( length => sub {
+        my ($self, $field, $value, $min, $max) = @_;
+
+        my $length = length $value;
+        return 0 if $length >= $min and !$max;
+        return 0 if $length >= $min and $length <= $max;
+        return 1;
     });
 
     $validator->add_check( http_url => sub {
@@ -146,7 +152,14 @@ Checks a number for a maximum value. If a non-number is passed, it's always inva
 
 =head2 length
 
-*not implemented yet*
+In contrast to the C<size> "built-in", this check also allows to
+omit the maximum length.
+
+  my $validation = $self->validation;
+  $validation->input({ word => 'abcde' });
+  $validation->required( 'word' )->length( 2, 5 ); # valid
+  $validation->required( 'word' )->length( 2 );  # valid
+  $validation->required( 'word' )->length( 8, 10 ); # not valid
 
 =head2 int
 
