@@ -1,7 +1,7 @@
 package Mojolicious::Plugin::AdditionalValidationChecks;
 use Mojo::Base 'Mojolicious::Plugin';
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use Email::Valid;
 use Scalar::Util qw(looks_like_number);
@@ -40,6 +40,14 @@ sub register {
     });
 
     $validator->add_check( phone => sub {
+        return 1 if !$_[2];
+        return 0 if $_[2] =~ m{\A
+            (?: \+ | 00? ) [1-9]{1,3} # country
+            \s*? [1-9]{2,5} \s*?      # local
+            [/-]?
+            \s*? [0-9]{4,12}          # phone
+        \z}x;
+        return 1;
     });
 
     $validator->add_check( length => sub {
@@ -104,7 +112,15 @@ Check if there's a mail host for it
 
 =head2 phone
 
-*not implemented yet*
+Checks if the given value is a phone number:
+
+  my $validation = $self->validation;
+  $validation->input({ nr => '+49 123 / 1321352' });
+  $validation->required( 'nr' )->phone(); # valid
+  $validation->input({ nr => '00 123 / 1321352' });
+  $validation->required( 'nr' )->phone(); # valid
+  $validation->input({ nr => '0123 / 1321352' });
+  $validation->required( 'nr' )->phone(); # valid
 
 =head2 min
 
