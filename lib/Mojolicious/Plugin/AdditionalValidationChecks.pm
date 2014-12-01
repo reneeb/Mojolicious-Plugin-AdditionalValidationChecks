@@ -187,6 +187,11 @@ Checks if a given string is an B<absolute> URL with I<http> or I<https> scheme.
   $validation->input({ url => 'mailto:dummy@example.com' });
   $validation->required( 'url' )->http_url(); # not valid
 
+=head1 MORE COMMON CHECKS?
+
+If you know some commonly used checks, please add an issue at
+L<https://github.com/reneeb/Mojolicious-Plugin-AdditionalValidationChecks/issues>.
+
 =head1 SEE ALSO
 
 L<Mojolicious>, L<Mojolicious::Guides>, L<http://mojolicio.us>.
