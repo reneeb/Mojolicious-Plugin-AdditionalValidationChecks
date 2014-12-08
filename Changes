@@ -1,7 +1,10 @@
 Release history for Mojolicious-Plugin-AdditionalValidationChecks
 =================================================================
 
-0.04 2014-12-??
+0.04 2014-12-08
+
+  [IMPROVEMENTS]
+  * add "not" check 
 
   [TESTS]
   * remove local test as this wasn't stable
