@@ -1,7 +1,7 @@
 Release history for Mojolicious-Plugin-AdditionalValidationChecks
 =================================================================
 
-0.05 2014-12-??
+0.05 2014-12-11
 
   [MISC]
   * Added Net::Domain::TLD as prereq as TravisCI reported a problem under Perl 5.20
