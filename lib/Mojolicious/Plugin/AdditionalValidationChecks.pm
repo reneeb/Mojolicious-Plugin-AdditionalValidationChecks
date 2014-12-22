@@ -141,6 +141,24 @@ sub register {
         my $found = $value =~ $types->{$type};
         return !$found;
     });
+
+    $validator->add_check( uuid => sub {
+        my ($validation, $field, $value, $type) = @_;
+
+        return 1 if !defined $value;
+
+        my %regexes = (
+            3   => qr/\A[0-9A-F]{8}-[0-9A-F]{4}-3[0-9A-F]{3}-[0-9A-F]{4}-[0-9A-F]{12}\z/i,
+            4   => qr/\A[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}\z/i,
+            5   => qr/\A[0-9A-F]{8}-[0-9A-F]{4}-5[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}\z/i,
+            all => qr/\A[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}\z/i,
+        );
+
+        $type ||= 'all';
+        my $regex = $regexes{$type} || $regexes{all};
+
+        return $value !~ $regex;
+    });
 }
 
 1;
@@ -313,6 +331,42 @@ colors:
   $validation->required( 'color' )->color( 'hex' ); # valid
   $validation->input({ color => '#affe12' });
   $validation->required( 'color' )->color( 'hex' ); # valid
+
+=back
+
+=head2 uuid
+
+As there are different variants of UUIDs, you can check for
+those variants
+
+=over 4
+
+=item * uuid - all
+
+This is the default variant
+
+  my $validation = $self->validation;
+  $validation->input({ uuid => 'A987FBC9-4BED-3078-CF07-9141BA07C9F3' });
+  $validation->required( 'uuid' )->uuid();        # valid
+  $validation->required( 'uuid' )->uuid( 'all' ); # valid
+
+=item * variant 3
+
+  my $validation = $self->validation;
+  $validation->input({ uuid => 'A987FBC9-4BED-3078-CF07-9141BA07C9F3' });
+  $validation->required( 'uuid' )->uuid( 3 ); # valid
+
+=item * variant 4
+
+  my $validation = $self->validation;
+  $validation->input({ uuid => '713ae7e3-cb32-45f9-adcb-7c4fa86b90c1' });
+  $validation->required( 'uuid' )->uuid( 4 ); # valid
+
+=item * variant 5
+
+  my $validation = $self->validation;
+  $validation->input({ uuid => '987FBC97-4BED-5078-AF07-9141BA07C9F3' });
+  $validation->required( 'uuid' )->uuid( 5 ); # valid
 
 =back
 
