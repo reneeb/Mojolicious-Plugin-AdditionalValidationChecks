@@ -1,6 +1,11 @@
 Release history for Mojolicious-Plugin-AdditionalValidationChecks
 =================================================================
 
+0.07 2014-12-22
+
+  [IMPROVEMENTS]
+  * add UUID check
+
 0.06 2014-12-11
 
   [IMPROVEMENTS]
