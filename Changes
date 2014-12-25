@@ -1,6 +1,8 @@
 Release history for Mojolicious-Plugin-AdditionalValidationChecks
 =================================================================
 
+0.09 2014-12-25
+
   [IMPROVEMENTS]
   * add ip check
 
