@@ -1,7 +1,7 @@
 package Mojolicious::Plugin::AdditionalValidationChecks;
 use Mojo::Base 'Mojolicious::Plugin';
 
-our $VERSION = '0.08';
+our $VERSION = '0.09';
 
 use Email::Valid;
 use Scalar::Util qw(looks_like_number);
@@ -190,6 +190,26 @@ sub register {
                 )?
             \z
         }xms;
+    });
+
+    $validator->add_check( ip => sub {
+        my ($validation, $field, $value, $type) = @_;
+
+        return 1 if !defined $value;
+
+        $type //= 4;
+
+        state $octett = qr{
+            (?: 25[0-5] | 2[0-4][0-9] | 1[0-9][0-9] | [1-9][0-9] | [0-9] )
+        }xms;
+
+        my %regexes = (
+            4 => qr/\A (?: $octett \. ){3} $octett \z/xms,
+        );
+
+        my $regex = $regexes{$type} || $regexes{4};
+
+        return $value !~ $regex;
     });
 }
 
@@ -425,6 +445,14 @@ This is the default variant
   $validation->required( 'float' )->float(); # valid
   $validation->input({ float => '0.123E-13' });
   $validation->required( 'float' )->float(); # valid
+
+=head2 ip
+
+  my $validation = $self->validation;
+  $validation->input({ ip => '1.1.1.1' });
+  $validation->required( 'ip' )->ip(); # valid
+  $validation->input({ ip => '255.255.255.255' });
+  $validation->required( 'ip' )->ip(); # valid
 
 =head1 ACKNOWLEDGEMENT
 
