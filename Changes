@@ -1,6 +1,11 @@
 Release history for Mojolicious-Plugin-AdditionalValidationChecks
 =================================================================
 
+0.11 2014-12-??
+
+  [IMPROVEMENTS]
+  * add between check
+
 0.10 2014-12-26
 
   [IMPROVEMENTS]
