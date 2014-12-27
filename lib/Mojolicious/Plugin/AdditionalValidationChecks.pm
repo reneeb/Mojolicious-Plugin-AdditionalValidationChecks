@@ -230,6 +230,24 @@ sub register {
 
         return $value !~ $regex;
     });
+
+    $validator->add_check( between => sub {
+        my $op = (looks_like_number( $_[3] ) and looks_like_number( $_[4] ) ) ? 'n' : 's';
+
+        my $result;
+        if ( $op eq 'n' ) {
+            $result = $_[2] < $_[3] || $_[2] > $_[4];
+        }
+        else {
+            $result = (
+                ( ( $_[2] cmp $_[3] ) == -1 ) ||
+                ( ( $_[4] cmp $_[2] ) == -1 )
+            );
+        }
+
+        return $result;
+    });
+
 }
 
 1;
