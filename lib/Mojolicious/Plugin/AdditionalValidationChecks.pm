@@ -1,7 +1,7 @@
 package Mojolicious::Plugin::AdditionalValidationChecks;
 use Mojo::Base 'Mojolicious::Plugin';
 
-our $VERSION = '0.11';
+our $VERSION = '0.12';
 
 use Email::Valid;
 use Scalar::Util qw(looks_like_number);
