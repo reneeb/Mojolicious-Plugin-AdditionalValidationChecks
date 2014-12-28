@@ -1,6 +1,11 @@
 Release history for Mojolicious-Plugin-AdditionalValidationChecks
 =================================================================
 
+0.12 2014-12-28
+
+  [IMPROVEMENTS]
+  * add "number" check (float || int)
+
 0.11 2014-12-27
 
   [IMPROVEMENTS]
