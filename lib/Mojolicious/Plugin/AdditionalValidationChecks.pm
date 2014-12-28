@@ -169,7 +169,7 @@ sub register {
     });
 
     $validator->add_check( float => sub {
-        my ($validation, $field, $value, $type) = @_;
+        my ($validation, $field, $value) = @_;
 
         return 1 if !defined $value;
 
@@ -246,6 +246,27 @@ sub register {
         }
 
         return $result;
+    });
+
+    $validator->add_check( number => sub {
+        my ($validation, @tmp) = (shift, shift, shift);
+
+        return 1 if !looks_like_number( $tmp[1] );
+
+        my $field = $validation->topic;
+        $validation->int( @_ );
+
+        return 0 if !$validation->has_error($field);
+
+        delete $validation->{error}->{$field};
+
+        $validation->float( @_ );
+
+        return 0 if !$validation->has_error($field);
+
+        delete $validation->{error}->{$field};
+ 
+        return 1;
     });
 
 }
