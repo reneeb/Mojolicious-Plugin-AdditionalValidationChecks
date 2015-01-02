@@ -1,6 +1,9 @@
 Release history for Mojolicious-Plugin-AdditionalValidationChecks
 =================================================================
 
+  [IMPROVEMENTS]
+  * add check for ISO dates (YYYY-MM-DD)
+
 0.12 2014-12-28
 
   [IMPROVEMENTS]

@@ -5,6 +5,7 @@ our $VERSION = '0.12';
 
 use Email::Valid;
 use Scalar::Util qw(looks_like_number);
+use Time::Piece;
 use Mojo::URL;
 
 sub register {
@@ -269,6 +270,21 @@ sub register {
         return 1;
     });
 
+    $validator->add_check( date => sub {
+        return 1 if !$_[2];
+        return 1 if $_[2] !~ m{\A[0-9]{4}-[0-9]{2}-[0-9]{2}\z};
+
+        my $date;
+        eval {
+            $date = Time::Piece->strptime( $_[2], '%Y-%m-%d' );
+            1;
+        } or return 1;
+
+        # this is needed as 2013-02-31 is parsed, but will return 2013-03-03 for ymd()
+        return 1 if $_[2] ne $date->ymd;
+
+        return 0;
+    });
 }
 
 1;
