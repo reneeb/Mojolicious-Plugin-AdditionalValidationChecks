@@ -1,7 +1,7 @@
 package Mojolicious::Plugin::AdditionalValidationChecks;
 use Mojo::Base 'Mojolicious::Plugin';
 
-our $VERSION = '0.13';
+our $VERSION = '0.14';
 
 use Email::Valid;
 use Scalar::Util qw(looks_like_number);
@@ -536,6 +536,16 @@ Some checks are inspired by L<https://github.com/chriso/validator.js>
 
 If you know some commonly used checks, please add an issue at
 L<https://github.com/reneeb/Mojolicious-Plugin-AdditionalValidationChecks/issues>.
+
+=head1 CONTRIBUTORS
+
+Those people contributed to this addon:
+
+=over 4
+
+=item * Florian Heyer
+
+=back
 
 =head1 SEE ALSO
 
