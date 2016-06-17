@@ -46,7 +46,7 @@ sub register {
             (?: \+ | 00? ) [0-9]{1,3} # country
             \s*? [0-9]{2,5} \s*?      # local
             [/-]?
-            \s*? [0-9]{4,12}          # phone
+            \s*? [0-9]{2,12}          # phone
         \z}x;
         return 1;
     });
