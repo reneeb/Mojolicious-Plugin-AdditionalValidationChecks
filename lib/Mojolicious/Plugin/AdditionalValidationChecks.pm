@@ -43,7 +43,7 @@ sub register {
     $validator->add_check( phone => sub {
         return 1 if !$_[2];
         return 0 if $_[2] =~ m{\A
-            (?: \+ | 00? ) [0-9]{1,3} # country
+            ((?: \+ | 00 ) [1-9]{1}[0-9]{0,2})? # country
             \s*? [0-9]{2,5} \s*?      # local
             [/-]?
             \s*? [0-9]{2,12}          # phone
