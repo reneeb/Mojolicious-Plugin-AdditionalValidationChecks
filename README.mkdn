@@ -8,7 +8,7 @@ Mojolicious::Plugin::AdditionalValidationChecks - Add addtional validation check
 
 # VERSION
 
-version 0.15
+version 0.16
 
 # SYNOPSIS
 
