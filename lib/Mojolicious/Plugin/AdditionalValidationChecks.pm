@@ -1,6 +1,6 @@
 package Mojolicious::Plugin::AdditionalValidationChecks;
 
-# ABSTRACT: Add addtional validation checks
+# ABSTRACT: Add additional validation checks
 
 use Mojo::Base 'Mojolicious::Plugin';
 
