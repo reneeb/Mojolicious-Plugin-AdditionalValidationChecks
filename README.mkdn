@@ -1,14 +1,15 @@
 [![Build Status](https://travis-ci.org/reneeb/Mojolicious-Plugin-AdditionalValidationChecks.svg?branch=master)](https://travis-ci.org/reneeb/Mojolicious-Plugin-AdditionalValidationChecks)
 [![Kwalitee status](http://cpants.cpanauthors.org/dist/Mojolicious-Plugin-AdditionalValidationChecks.png)](http://cpants.charsbar.org/dist/overview/Mojolicious-Plugin-AdditionalValidationChecks)
 [![GitHub issues](https://img.shields.io/github/issues/reneeb/Mojolicious-Plugin-AdditionalValidationChecks.svg)](https://github.com/reneeb/Mojolicious-Plugin-AdditionalValidationChecks/issues)
+[![CPAN Cover Status](https://cpancoverbadge.perl-services.de/Mojolicious-Plugin-AdditionalValidationChecks-0.17)](https://cpancoverbadge.perl-services.de/Mojolicious-Plugin-AdditionalValidationChecks-0.17)
 
 # NAME
 
-Mojolicious::Plugin::AdditionalValidationChecks - Add addtional validation checks
+Mojolicious::Plugin::AdditionalValidationChecks - Add additional validation checks
 
 # VERSION
 
-version 0.16
+version 0.17
 
 # SYNOPSIS
 
@@ -22,8 +23,8 @@ version 0.16
 
 # DESCRIPTION
 
-[Mojolicious::Plugin::AdditionalValidationChecks](https://metacpan.org/pod/Mojolicious::Plugin::AdditionalValidationChecks) adds a few validation checks to
-the [Mojolicious validator](https://metacpan.org/pod/Mojolicious::Validator).
+[Mojolicious::Plugin::AdditionalValidationChecks](https://metacpan.org/pod/Mojolicious%3A%3APlugin%3A%3AAdditionalValidationChecks) adds a few validation checks to
+the [Mojolicious validator](https://metacpan.org/pod/Mojolicious%3A%3AValidator).
 
 # NOTE
 
@@ -267,7 +268,7 @@ Those people contributed to this addon:
 
 # SEE ALSO
 
-[Mojolicious](https://metacpan.org/pod/Mojolicious), [Mojolicious::Guides](https://metacpan.org/pod/Mojolicious::Guides), [http://mojolicio.us](http://mojolicio.us).
+[Mojolicious](https://metacpan.org/pod/Mojolicious), [Mojolicious::Guides](https://metacpan.org/pod/Mojolicious%3A%3AGuides), [http://mojolicio.us](http://mojolicio.us).
 
 
 
