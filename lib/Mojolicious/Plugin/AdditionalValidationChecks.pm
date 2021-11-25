@@ -96,11 +96,11 @@ sub register {
         }x;
 
         state $rgb_percent = qr{
-            \s* (?: 100 | [1-9][0-] | [0-9] ) \%
+            \s* (?: 100 | [1-9][0-9] | [0-9] ) \%
         }x;
 
         state $alpha = qr{
-            \s* (?: (?: 0 (?:\.[0-9]+)? )| (?: 1 (?:\.0)? ) )
+            \s* (?: 0 | 0?\.[0-9]+ | 1(?:\.0)? )
         }x;
 
         state $types = {
@@ -138,6 +138,23 @@ sub register {
                     (?: (?:[0-9A-Fa-f]){3} ){1,2}
                 \z
             }xms,
+            hsl  => qr{
+                \A
+                    hsla?\(
+                        (?:
+                            -? [0-9]+ \s* (?:deg|g?rad|turn)?
+                            (?<sep>[, ]) \s*
+                            $rgb_percent \g{sep} \s*
+                            $rgb_percent \s*
+                            (?:
+                                (?(?{$+{sep} eq ','}) , | / ) \s*
+                                (?:$alpha|$rgb_percent)
+                            )?
+                        )    
+                    \)
+                \z
+            }xms,
+
         };
 
         return 1 if !$types->{$type};
