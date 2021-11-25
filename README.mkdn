@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/reneeb/Mojolicious-Plugin-AdditionalValidationChecks.svg?branch=master)](https://travis-ci.org/reneeb/Mojolicious-Plugin-AdditionalValidationChecks)
-[![Kwalitee status](http://cpants.cpanauthors.org/dist/Mojolicious-Plugin-AdditionalValidationChecks.png)](http://cpants.charsbar.org/dist/overview/Mojolicious-Plugin-AdditionalValidationChecks)
+[![Kwalitee status](https://cpants.cpanauthors.org/dist/Mojolicious-Plugin-AdditionalValidationChecks.png)](https://cpants.cpanauthors.org/dist/Mojolicious-Plugin-AdditionalValidationChecks)
 [![GitHub issues](https://img.shields.io/github/issues/reneeb/Mojolicious-Plugin-AdditionalValidationChecks.svg)](https://github.com/reneeb/Mojolicious-Plugin-AdditionalValidationChecks/issues)
-[![CPAN Cover Status](https://cpancoverbadge.perl-services.de/Mojolicious-Plugin-AdditionalValidationChecks-0.17)](https://cpancoverbadge.perl-services.de/Mojolicious-Plugin-AdditionalValidationChecks-0.17)
+[![CPAN Cover Status](https://cpancoverbadge.perl-services.de/Mojolicious-Plugin-AdditionalValidationChecks-0.18)](https://cpancoverbadge.perl-services.de/Mojolicious-Plugin-AdditionalValidationChecks-0.18)
 
 # NAME
 
@@ -9,7 +9,7 @@ Mojolicious::Plugin::AdditionalValidationChecks - Add additional validation chec
 
 # VERSION
 
-version 0.17
+version 0.18
 
 # SYNOPSIS
 
