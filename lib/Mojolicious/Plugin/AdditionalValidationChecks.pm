@@ -317,6 +317,30 @@ __END__
   $validation->input({ nr => 3 });
   $validation->required( 'nr' )->max( 10 );
 
+or more realistically, validating a parameter from the URL query string:
+
+  use Mojolicious::Lite -signatures;
+
+  # Load the plugin
+  plugin 'AdditionalValidationChecks';
+
+  # Route leading to a validation check
+  any '/' => sub ($c) {
+      # Extract 'nr' from the query string, default to 0 if not provided
+      my $nr = $c->param('nr') // 0;
+
+      my $validation = $c->validation;
+      $validation->input({ nr => $nr });
+      $validation->required('nr')->max(10);
+      if ($validation->is_valid) {
+          $c->render(text => "Number is valid.");
+      } else {
+          $c->render(text => "Number is not valid.");
+      }
+  };
+
+  app->start;
+
 =head1 DESCRIPTION
 
 L<Mojolicious::Plugin::AdditionalValidationChecks> adds a few validation checks to
